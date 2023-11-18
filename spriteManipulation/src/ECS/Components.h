@@ -2,6 +2,8 @@
 
 #include <glm/glm.hpp>
 #include <string>
+#include <vector>
+
 #include <Game/Graphics/PixelShader.h>
 #include "Game/Graphics/Tile.h"
 #include "Game/Graphics/DungeonTileType.h"
@@ -11,9 +13,11 @@ struct NameComponent {
 };
 
 struct TransformComponent {
-  glm::ivec2 position;
-  glm::vec2 scale;
-  double rotation;
+  // glm::ivec2 position;
+  // glm::vec2 scale;
+  // double rotation;
+  int x;
+  int y;
 };
 
 struct SpeedComponent {
@@ -44,9 +48,3 @@ struct TilemapComponent {
   int tileSize;
   std::vector<DungeonTileType> tileTypes; 
 };
-
-/* class Tile {
-public:
-    TileType type;         // El tipo base del tile
-    TileBorderType borderType; // El tipo de borde para el auto-tiling
-    SDL_Texture* texture; */

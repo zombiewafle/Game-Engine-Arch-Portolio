@@ -11,13 +11,13 @@ class RectRenderSystem : public RenderSystem {
 
 class MovementUpdateSystem : public UpdateSystem {
   public:
-    MovementUpdateSystem(int screen_width, int screen_height);
+    // MovementUpdateSystem(int screen_width, int screen_height);
 
     void run(double dT) override;
 
-  private:
-    int screen_width;
-    int screen_height;
+  // private:
+  //   int screen_width;
+  //   int screen_height;
 };
 
 class PlayerInputEventSystem : public EventSystem {
@@ -64,20 +64,17 @@ public:
 
 private:
     SDL_Renderer* renderer;
-    FastNoiseLite noise; // Asumimos que tienes una instancia de ruido aquí.
+    FastNoiseLite noise; 
     float offsetX;
     float offsetY;
     float zoom;
 
-    // Método auxiliar para determinar si un tile es parte de la mazmorra.
     bool isDungeonTile(int x, int y) {
-        // El ruido nos da un valor entre -1 y 1.
         float noiseValue = noise.GetNoise(
             static_cast<float>(x + offsetX) * zoom, 
             static_cast<float>(y + offsetY) * zoom
         );
 
-        // Utilizamos un umbral para determinar si es un espacio abierto.
         return noiseValue > -0.2f && noiseValue < 0.2f;
     }
 };
@@ -86,3 +83,9 @@ class TilemapRenderSystem : public RenderSystem {
   public:
     void run(SDL_Renderer* renderer) override;
 };
+
+class PlayerSpriteUpdateSystem : public UpdateSystem {
+  public:
+    void run(double dT) override;
+};
+

@@ -8,8 +8,6 @@ set(OLD_GLOB
   "/home/zombiewafle/Escritorio/spriteManipulation/src/Game/Game.cpp"
   "/home/zombiewafle/Escritorio/spriteManipulation/src/Game/Graphics/Texture.cpp"
   "/home/zombiewafle/Escritorio/spriteManipulation/src/Game/Graphics/TextureManager.cpp"
-  "/home/zombiewafle/Escritorio/spriteManipulation/src/Page1/Page1.cpp"
-  "/home/zombiewafle/Escritorio/spriteManipulation/src/Page1/Systems.cpp"
   "/home/zombiewafle/Escritorio/spriteManipulation/src/Scene/Scene.cpp"
   "/home/zombiewafle/Escritorio/spriteManipulation/src/main.cpp"
   "/home/zombiewafle/Escritorio/spriteManipulation/src/spriteManipulation/Systems.cpp"

@@ -11,8 +11,6 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/zombiewafle/Escritorio/spriteManipulation/src/Game/Game.cpp" "CMakeFiles/GAME.dir/src/Game/Game.cpp.o" "gcc" "CMakeFiles/GAME.dir/src/Game/Game.cpp.o.d"
   "/home/zombiewafle/Escritorio/spriteManipulation/src/Game/Graphics/Texture.cpp" "CMakeFiles/GAME.dir/src/Game/Graphics/Texture.cpp.o" "gcc" "CMakeFiles/GAME.dir/src/Game/Graphics/Texture.cpp.o.d"
   "/home/zombiewafle/Escritorio/spriteManipulation/src/Game/Graphics/TextureManager.cpp" "CMakeFiles/GAME.dir/src/Game/Graphics/TextureManager.cpp.o" "gcc" "CMakeFiles/GAME.dir/src/Game/Graphics/TextureManager.cpp.o.d"
-  "/home/zombiewafle/Escritorio/spriteManipulation/src/Page1/Page1.cpp" "CMakeFiles/GAME.dir/src/Page1/Page1.cpp.o" "gcc" "CMakeFiles/GAME.dir/src/Page1/Page1.cpp.o.d"
-  "/home/zombiewafle/Escritorio/spriteManipulation/src/Page1/Systems.cpp" "CMakeFiles/GAME.dir/src/Page1/Systems.cpp.o" "gcc" "CMakeFiles/GAME.dir/src/Page1/Systems.cpp.o.d"
   "/home/zombiewafle/Escritorio/spriteManipulation/src/Scene/Scene.cpp" "CMakeFiles/GAME.dir/src/Scene/Scene.cpp.o" "gcc" "CMakeFiles/GAME.dir/src/Scene/Scene.cpp.o.d"
   "/home/zombiewafle/Escritorio/spriteManipulation/src/main.cpp" "CMakeFiles/GAME.dir/src/main.cpp.o" "gcc" "CMakeFiles/GAME.dir/src/main.cpp.o.d"
   "/home/zombiewafle/Escritorio/spriteManipulation/src/spriteManipulation/Systems.cpp" "CMakeFiles/GAME.dir/src/spriteManipulation/Systems.cpp.o" "gcc" "CMakeFiles/GAME.dir/src/spriteManipulation/Systems.cpp.o.d"

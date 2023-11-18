@@ -1,10 +1,11 @@
+
 #include <print.h>
 #include <FastNoise.h>
 #include <SDL2/SDL.h>
 #include "Systems.h"
 #include <ctime>
 #include <cstdlib>
-#include <fstream> // Necesario para std::ifstream
+#include <fstream> 
 #include <vector>
 #include <string>
 #include <iostream>
@@ -54,8 +55,8 @@ void SpriteRenderSystem::run(SDL_Renderer* renderer) {
         int scale = 5;
 
         texture->render(
-            transformComponent.position.x * scale,
-            transformComponent.position.y * scale,
+            transformComponent.x * scale,
+            transformComponent.y * scale,
             48 * scale,
             48 * scale,
             &clip
@@ -197,6 +198,86 @@ void TilemapRenderSystem::run(SDL_Renderer* renderer) {
         }
     }
 }
+
+void PlayerInputEventSystem::run(SDL_Event event) {
+    auto& playerMovement = scene->player->get<SpeedComponent>();
+    int speed = 80;
+
+    if (event.type == SDL_KEYDOWN) {
+        switch (event.key.keysym.sym) {
+            case SDLK_LEFT:
+                playerMovement.x = -speed;
+                break;
+            case SDLK_RIGHT:
+                playerMovement.x = speed;
+                break;
+            case SDLK_UP:
+                playerMovement.y = -speed;
+                break;
+            case SDLK_DOWN:
+                playerMovement.y = speed;
+                break;
+        }
+   }
+    else if (event.type == SDL_KEYUP) {
+        switch (event.key.keysym.sym) {
+            case SDLK_LEFT:
+            case SDLK_RIGHT:
+                playerMovement.x = 0;
+                break;
+            case SDLK_UP:
+            case SDLK_DOWN:
+                playerMovement.y = 0;
+                break;
+        }
+    }
+}
+
+void PlayerSpriteUpdateSystem::run(double dT) {
+    auto& playerMovement = scene->player->get<SpeedComponent>();
+    auto& playerSprite = scene->player->get<SpriteComponent>();
+
+    if (playerMovement.x < 0) {
+        playerSprite.yIndex = 7;
+    }
+    else if (playerMovement.x > 0) {
+        playerSprite.yIndex = 6;
+    }
+    else if (playerMovement.y < 0) {
+        playerSprite.yIndex = 5;
+    }
+    else if (playerMovement.y > 0) {
+        playerSprite.yIndex = 4;
+    }
+    else {
+        if (playerSprite.yIndex == 7) {
+            playerSprite.yIndex = 2;
+        }
+        else if (playerSprite.yIndex == 6) {
+            playerSprite.yIndex = 3;
+        }
+        else if (playerSprite.yIndex == 5) {
+            playerSprite.yIndex = 1;
+        }
+        else if (playerSprite.yIndex == 4) {
+            playerSprite.yIndex = 0;
+        }
+    }
+}
+
+void MovementUpdateSystem::run(double dT) {
+  const auto view = scene->r.view<TransformComponent, SpeedComponent>();
+  for (const entt::entity e : view) {
+    auto& pos = view.get<TransformComponent>(e);
+    const auto vel = view.get<SpeedComponent>(e);
+
+    pos.x += vel.x * dT;
+    pos.y += vel.y * dT;
+  }
+}
+
+
+
 
 
 

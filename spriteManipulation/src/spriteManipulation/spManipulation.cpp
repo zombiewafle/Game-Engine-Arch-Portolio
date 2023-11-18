@@ -17,19 +17,6 @@ std::unique_ptr<Scene> spManipulation::createGameplayScene()
 {
   auto scene = std::make_unique<Scene>("GAMEPLAY SCENE");
 
-  Entity red = scene->createEntity("player", 0, 0);
-  auto& s = red.addComponent<SpriteComponent>(
-    "Sprites/Player/SpriteSheet.png",
-    0, 0,
-    48,
-    8,
-    1000,
-    Shaders::red,
-    SDL_GetTicks()
-  );
-  
-  s.lastUpdate = SDL_GetTicks();
-
   Entity black = scene->createEntity("enemy", 20, 0);
   black.addComponent<SpriteComponent>(
     "Sprites/Player/SpriteSheet.png",
@@ -41,29 +28,22 @@ std::unique_ptr<Scene> spManipulation::createGameplayScene()
     SDL_GetTicks()
   );
 
-  Entity shadow = scene->createEntity("enemy", 40, 0);
-  shadow.addComponent<SpriteComponent>(
-    "Sprites/Player/SpriteSheet.png",
+  scene->player->addComponent<SpriteComponent>(
+    "Sprites/Player/Sprite-0001.png",
     0, 0,
     48,
-    8,
+    4,
     1000,
-    Shaders::shadow, 
+    PixelShader{nullptr, ""},
     SDL_GetTicks()
   );
 
-  
-  Entity vanilla = scene->createEntity("enemy", 60, 0);
-  vanilla.addComponent<SpriteComponent>(
-    "Sprites/Player/SpriteSheet.png",
-    0, 0,
-    48,
-    8,
-    1000
-  ); 
-  
   scene->addSetupSystem<TilemapSetupSystem>(renderer);
   scene->addRenderSystem<TilemapRenderSystem>();
+
+  scene->addEventSystem<PlayerInputEventSystem>();
+  scene->addUpdateSystem<PlayerSpriteUpdateSystem>();
+  scene->addUpdateSystem<MovementUpdateSystem>();
 
   scene->addSetupSystem<SpriteSetupSystem>(renderer);
   scene->addRenderSystem<SpriteRenderSystem>();

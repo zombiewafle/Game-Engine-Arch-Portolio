@@ -202,54 +202,6 @@ src/Game/Graphics/TextureManager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/GAME.dir/build.make CMakeFiles/GAME.dir/src/Game/Graphics/TextureManager.cpp.s
 .PHONY : src/Game/Graphics/TextureManager.cpp.s
 
-src/Page1/Page1.o: src/Page1/Page1.cpp.o
-.PHONY : src/Page1/Page1.o
-
-# target to build an object file
-src/Page1/Page1.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/GAME.dir/build.make CMakeFiles/GAME.dir/src/Page1/Page1.cpp.o
-.PHONY : src/Page1/Page1.cpp.o
-
-src/Page1/Page1.i: src/Page1/Page1.cpp.i
-.PHONY : src/Page1/Page1.i
-
-# target to preprocess a source file
-src/Page1/Page1.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/GAME.dir/build.make CMakeFiles/GAME.dir/src/Page1/Page1.cpp.i
-.PHONY : src/Page1/Page1.cpp.i
-
-src/Page1/Page1.s: src/Page1/Page1.cpp.s
-.PHONY : src/Page1/Page1.s
-
-# target to generate assembly for a file
-src/Page1/Page1.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/GAME.dir/build.make CMakeFiles/GAME.dir/src/Page1/Page1.cpp.s
-.PHONY : src/Page1/Page1.cpp.s
-
-src/Page1/Systems.o: src/Page1/Systems.cpp.o
-.PHONY : src/Page1/Systems.o
-
-# target to build an object file
-src/Page1/Systems.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/GAME.dir/build.make CMakeFiles/GAME.dir/src/Page1/Systems.cpp.o
-.PHONY : src/Page1/Systems.cpp.o
-
-src/Page1/Systems.i: src/Page1/Systems.cpp.i
-.PHONY : src/Page1/Systems.i
-
-# target to preprocess a source file
-src/Page1/Systems.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/GAME.dir/build.make CMakeFiles/GAME.dir/src/Page1/Systems.cpp.i
-.PHONY : src/Page1/Systems.cpp.i
-
-src/Page1/Systems.s: src/Page1/Systems.cpp.s
-.PHONY : src/Page1/Systems.s
-
-# target to generate assembly for a file
-src/Page1/Systems.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/GAME.dir/build.make CMakeFiles/GAME.dir/src/Page1/Systems.cpp.s
-.PHONY : src/Page1/Systems.cpp.s
-
 src/Scene/Scene.o: src/Scene/Scene.cpp.o
 .PHONY : src/Scene/Scene.o
 
@@ -364,12 +316,6 @@ help:
 	@echo "... src/Game/Graphics/TextureManager.o"
 	@echo "... src/Game/Graphics/TextureManager.i"
 	@echo "... src/Game/Graphics/TextureManager.s"
-	@echo "... src/Page1/Page1.o"
-	@echo "... src/Page1/Page1.i"
-	@echo "... src/Page1/Page1.s"
-	@echo "... src/Page1/Systems.o"
-	@echo "... src/Page1/Systems.i"
-	@echo "... src/Page1/Systems.s"
 	@echo "... src/Scene/Scene.o"
 	@echo "... src/Scene/Scene.i"
 	@echo "... src/Scene/Scene.s"
