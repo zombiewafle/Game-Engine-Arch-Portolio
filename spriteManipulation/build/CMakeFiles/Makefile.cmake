@@ -8,9 +8,9 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
   "/home/zombiewafle/Escritorio/spriteManipulation/CMakeLists.txt"
-  "CMakeFiles/3.27.7/CMakeCCompiler.cmake"
-  "CMakeFiles/3.27.7/CMakeCXXCompiler.cmake"
-  "CMakeFiles/3.27.7/CMakeSystem.cmake"
+  "CMakeFiles/3.27.8/CMakeCCompiler.cmake"
+  "CMakeFiles/3.27.8/CMakeCXXCompiler.cmake"
+  "CMakeFiles/3.27.8/CMakeSystem.cmake"
   "CMakeFiles/VerifyGlobs.cmake"
   "CMakeFiles/cmake.verify_globs"
   "/home/zombiewafle/vcpkg/installed/x64-linux/share/SDL2_image/SDL2_image-static-targets-debug.cmake"

@@ -43,7 +43,7 @@ std::unique_ptr<Scene> spManipulation::createGameplayScene()
 
   scene->addEventSystem<PlayerInputEventSystem>();
   scene->addUpdateSystem<PlayerSpriteUpdateSystem>();
-  scene->addUpdateSystem<MovementUpdateSystem>();
+  // scene->addUpdateSystem<MovementUpdateSystem>();
 
   scene->addSetupSystem<SpriteSetupSystem>(renderer);
   scene->addRenderSystem<SpriteRenderSystem>();
