@@ -9,6 +9,8 @@
 #include <vector>
 #include <string>
 #include <iostream>
+// #include <entt/entt.hpp>
+
 
 #include "Components.h"
 #include "ECS/Entity.h"
@@ -102,8 +104,8 @@ TilemapSetupSystem::~TilemapSetupSystem() {
 
 void TilemapSetupSystem::run() {
   auto& tilemapComponent = scene->world->get<TilemapComponent>();
-  tilemapComponent.width = 50;
-  tilemapComponent.height = 38;
+  tilemapComponent.width = 48;
+  tilemapComponent.height = 48;
   tilemapComponent.tileSize = 16;
   tilemapComponent.tilemap.resize(tilemapComponent.width * tilemapComponent.height);
 
@@ -176,7 +178,7 @@ void TilemapRenderSystem::run(SDL_Renderer* renderer) {
     int width = tilemapComponent.width;
     int height = tilemapComponent.height;
     int size = tilemapComponent.tileSize;
-    int scale = 5;
+    int scale = 7;
     // SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
 
     for (int y = 0; y < height; y++) {
@@ -265,4 +267,144 @@ void PlayerSpriteUpdateSystem::run(double dT) {
     }
 }
 
+
+void MovementUpdateSystem::run(double dT) {
+    const auto view = scene->r.view<TransformComponent, SpeedComponent, SpriteComponent>();
+
+    // Suponiendo que tienes variables que almacenan el ancho y el alto de la ventana
+    const int windowWidth = 180;  // Reemplaza con el ancho real de la ventana
+    const int windowHeight = 135; // Reemplaza con el alto real de la ventana
+
+    for (const entt::entity e : view) {
+        auto& transform = view.get<TransformComponent>(e);
+        const auto& speed = view.get<SpeedComponent>(e);
+        const auto& sprite = view.get<SpriteComponent>(e);
+
+        // Calcular la nueva posición basada en la velocidad
+        int newX = transform.x + speed.x * dT;
+        int newY = transform.y + speed.y * dT;
+
+        // Ajustar la posición basada en el tamaño del sprite (o collider si es diferente)
+        int spriteWidth = sprite.size;   // Asumiendo que el tamaño del sprite es el ancho
+        int spriteHeight = sprite.size;  // Asumiendo que el tamaño del sprite es el alto
+
+        // Verificar los límites de la ventana y ajustar si es necesario
+        newX = std::max(0, std::min(newX, windowWidth - spriteWidth));
+        newY = std::max(0, std::min(newY, windowHeight - spriteHeight));
+
+        // Actualizar la posición del componente Transform
+        transform.x = newX;
+        transform.y = newY;
+    }
+}
+
+
+
+
+/* void PhysicsSystem::run(double dT) {
+    const glm::vec2 GRAVITY(0.0f, -9.81f); // Definir la gravedad
+    
+    auto view = scene->r.view<RigidbodyComponent, TransformComponent>();
+    for (const entt::entity e : view) {
+        auto& rb = view.get<RigidbodyComponent>(e);
+        auto& transform = view.get<TransformComponent>(e);
+
+        if (!rb.isStatic) {
+            float deltaTime = static_cast<float>(dT);
+            rb.acceleration += GRAVITY * deltaTime;
+            rb.velocity += rb.acceleration * deltaTime;
+            transform.x += rb.velocity.x * deltaTime;
+            transform.y += rb.velocity.y * deltaTime;
+            rb.acceleration = glm::vec2(0.0f);
+
+            // Debugging output
+            std::cout << "Entity: " << static_cast<uint32_t>(e)
+                      << " Position: " << transform.x << ", " << transform.y
+                      << " Velocity: " << rb.velocity.x << ", " << rb.velocity.y
+                      << " Acceleration: " << rb.acceleration.x << ", " << rb.acceleration.y
+                      << std::endl;
+        }
+    }
+}
+ */
+
+void CollisionSystem::run(double dT) {
+  auto view = scene->r.view<ColliderComponent, TransformComponent>();
+  for (auto itA = view.begin(); itA != view.end(); ++itA) {
+    auto entityA = *itA;
+    auto [colliderA, transformA] = view.get<ColliderComponent, TransformComponent>(entityA);
+    for (auto itB = std::next(itA); itB != view.end(); ++itB) {
+      auto entityB = *itB;
+      auto [colliderB, transformB] = view.get<ColliderComponent, TransformComponent>(entityB);
+      if (checkAABBCollision(transformA, colliderA, transformB, colliderB)) {
+        colliderA.isInCollision = true;
+        colliderB.isInCollision = true;
+        handleCollision(entityA, entityB);
+      }
+      else{
+        colliderA.isInCollision = false;
+        colliderB.isInCollision = false;
+      }
+    }
+  }
+}
+
+bool CollisionSystem::checkAABBCollision(TransformComponent& transformA, ColliderComponent& colliderA,
+                                         TransformComponent& transformB, ColliderComponent& colliderB){
+    // Check if there's no overlap on the x-axis
+    if (transformA.x + colliderA.width < transformB.x || transformB.x + colliderB.width < transformA.x) return false;
+    // Check if there's no overlap on the y-axis
+    if (transformA.y + colliderA.height < transformB.y || transformB.y + colliderB.height < transformA.y) return false;
+    // Overlap exists, so there is a collision
+    
+    return true;
+}
+
+
+
+void CollisionSystem::handleCollision(entt::entity entityA, entt::entity entityB) {
+    // Asume que tienes acceso a un componente de Sprite o Render para cada entidad
+    auto& spriteA = scene->r.get<SpriteComponent>(entityA);
+    auto& spriteB = scene->r.get<SpriteComponent>(entityB);
+
+    // Cambia el color de los sprites implicados en la colisión
+    spriteA.color = SDL_Color{255, 0, 0, 255}; // Rojo
+    spriteB.color = SDL_Color{255, 0, 0, 255}; // Rojo
+
+    // Imprime la colisión en la consola
+    std::cout << "Collision detected between entities: " << static_cast<uint32_t>(entityA)
+              << " and " << static_cast<uint32_t>(entityB) << std::endl;
+    
+    
+}
+
+void ColliderRenderSystem::run(SDL_Renderer* renderer) {
+    auto view = scene->r.view<TransformComponent, ColliderComponent, SpriteComponent>();  // Asegúrate de tener el SpriteComponent también
+
+    for (auto entity : view) {
+        auto [transform, collider, sprite] = view.get<TransformComponent, ColliderComponent, SpriteComponent>(entity);
+
+        // Ajusta los colores según el estado de la colisión
+        SDL_SetRenderDrawColor(renderer,
+                               collider.isInCollision ? 255 : 0, // Rojo si está colisionando
+                               collider.isInCollision ? 0 : 255, // Verde si no está colisionando
+                               0,                                // Sin componente azul
+                               SDL_ALPHA_OPAQUE);               // Opaco
+
+        // Calcula la posición y el tamaño del rectángulo del colisionador
+        SDL_Rect rect = {
+            static_cast<int>(transform.x ), // Ajusta la posición X con el desplazamiento del sprite
+            static_cast<int>(transform.y ), // Ajusta la posición Y con el desplazamiento del sprite
+            static_cast<int>(collider.width ),  // Escala el ancho si es necesario
+            static_cast<int>(collider.height )  // Escala el alto si es necesario
+        };
+
+        // Dibuja el rectángulo del colisionador
+        SDL_RenderDrawRect(renderer, &rect);
+        
+        // Debugging: imprime información sobre la colisión
+        std::cout << "Entity: " << static_cast<uint32_t>(entity)
+                  << " Collision: " << collider.isInCollision << std::endl;
+    }
+}
 

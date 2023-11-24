@@ -226,6 +226,30 @@ src/Scene/Scene.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/GAME.dir/build.make CMakeFiles/GAME.dir/src/Scene/Scene.cpp.s
 .PHONY : src/Scene/Scene.cpp.s
 
+src/Scene/SceneManager.o: src/Scene/SceneManager.cpp.o
+.PHONY : src/Scene/SceneManager.o
+
+# target to build an object file
+src/Scene/SceneManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GAME.dir/build.make CMakeFiles/GAME.dir/src/Scene/SceneManager.cpp.o
+.PHONY : src/Scene/SceneManager.cpp.o
+
+src/Scene/SceneManager.i: src/Scene/SceneManager.cpp.i
+.PHONY : src/Scene/SceneManager.i
+
+# target to preprocess a source file
+src/Scene/SceneManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GAME.dir/build.make CMakeFiles/GAME.dir/src/Scene/SceneManager.cpp.i
+.PHONY : src/Scene/SceneManager.cpp.i
+
+src/Scene/SceneManager.s: src/Scene/SceneManager.cpp.s
+.PHONY : src/Scene/SceneManager.s
+
+# target to generate assembly for a file
+src/Scene/SceneManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GAME.dir/build.make CMakeFiles/GAME.dir/src/Scene/SceneManager.cpp.s
+.PHONY : src/Scene/SceneManager.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -319,6 +343,9 @@ help:
 	@echo "... src/Scene/Scene.o"
 	@echo "... src/Scene/Scene.i"
 	@echo "... src/Scene/Scene.s"
+	@echo "... src/Scene/SceneManager.o"
+	@echo "... src/Scene/SceneManager.i"
+	@echo "... src/Scene/SceneManager.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

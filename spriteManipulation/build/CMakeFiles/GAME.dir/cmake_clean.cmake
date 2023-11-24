@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/GAME.dir/src/Game/Graphics/TextureManager.cpp.o.d"
   "CMakeFiles/GAME.dir/src/Scene/Scene.cpp.o"
   "CMakeFiles/GAME.dir/src/Scene/Scene.cpp.o.d"
+  "CMakeFiles/GAME.dir/src/Scene/SceneManager.cpp.o"
+  "CMakeFiles/GAME.dir/src/Scene/SceneManager.cpp.o.d"
   "CMakeFiles/GAME.dir/src/main.cpp.o"
   "CMakeFiles/GAME.dir/src/main.cpp.o.d"
   "CMakeFiles/GAME.dir/src/spriteManipulation/Systems.cpp.o"

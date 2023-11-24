@@ -15,11 +15,13 @@ Scene::Scene(const std::string& name)
   print("Scene ", name, "constructed!");
   world = new Entity(r.create(), this);
   world->addComponent<TilemapComponent>();
+  // world->addComponent<ColliderComponent>(x, y);
 
   player = new Entity(r.create(), this);
   player->addComponent<TransformComponent>(0, 0);
   player->addComponent<SpeedComponent>(0, 0);
-  
+  player->addComponent<RigidbodyComponent>(glm::vec2(0.0f, 0.0f), glm::vec2(0.0f, 0.0f), true, 1.0f, false); 
+  player->addComponent<ColliderComponent>(16,16);
 }
 
 Scene::~Scene()
@@ -32,6 +34,9 @@ Entity Scene::createEntity(const std::string& name, int x, int y)
   Entity entity = { r.create(), this };
   entity.addComponent<NameComponent>(name);
   entity.addComponent<TransformComponent>(x, y);
+  entity.addComponent<RigidbodyComponent>(glm::vec2(0.0f, 0.0f), glm::vec2(0.0f, 0.0f), true, 1.0f, false); 
+  entity.addComponent<ColliderComponent>(16,16);
+  // entity.addComponent<RigidbodyComponent>(glm::vec2(0.0f, 0.0f), glm::vec2(0.0f, 0.0f), true, 1.0f, true); 
 
   return entity;
 }

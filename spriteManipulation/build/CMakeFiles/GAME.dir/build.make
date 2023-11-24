@@ -139,10 +139,24 @@ CMakeFiles/GAME.dir/src/Scene/Scene.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/GAME.dir/src/Scene/Scene.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zombiewafle/Escritorio/spriteManipulation/src/Scene/Scene.cpp -o CMakeFiles/GAME.dir/src/Scene/Scene.cpp.s
 
+CMakeFiles/GAME.dir/src/Scene/SceneManager.cpp.o: CMakeFiles/GAME.dir/flags.make
+CMakeFiles/GAME.dir/src/Scene/SceneManager.cpp.o: /home/zombiewafle/Escritorio/spriteManipulation/src/Scene/SceneManager.cpp
+CMakeFiles/GAME.dir/src/Scene/SceneManager.cpp.o: CMakeFiles/GAME.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/zombiewafle/Escritorio/spriteManipulation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/GAME.dir/src/Scene/SceneManager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/GAME.dir/src/Scene/SceneManager.cpp.o -MF CMakeFiles/GAME.dir/src/Scene/SceneManager.cpp.o.d -o CMakeFiles/GAME.dir/src/Scene/SceneManager.cpp.o -c /home/zombiewafle/Escritorio/spriteManipulation/src/Scene/SceneManager.cpp
+
+CMakeFiles/GAME.dir/src/Scene/SceneManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/GAME.dir/src/Scene/SceneManager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zombiewafle/Escritorio/spriteManipulation/src/Scene/SceneManager.cpp > CMakeFiles/GAME.dir/src/Scene/SceneManager.cpp.i
+
+CMakeFiles/GAME.dir/src/Scene/SceneManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/GAME.dir/src/Scene/SceneManager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zombiewafle/Escritorio/spriteManipulation/src/Scene/SceneManager.cpp -o CMakeFiles/GAME.dir/src/Scene/SceneManager.cpp.s
+
 CMakeFiles/GAME.dir/src/spriteManipulation/Systems.cpp.o: CMakeFiles/GAME.dir/flags.make
 CMakeFiles/GAME.dir/src/spriteManipulation/Systems.cpp.o: /home/zombiewafle/Escritorio/spriteManipulation/src/spriteManipulation/Systems.cpp
 CMakeFiles/GAME.dir/src/spriteManipulation/Systems.cpp.o: CMakeFiles/GAME.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/zombiewafle/Escritorio/spriteManipulation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/GAME.dir/src/spriteManipulation/Systems.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/zombiewafle/Escritorio/spriteManipulation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/GAME.dir/src/spriteManipulation/Systems.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/GAME.dir/src/spriteManipulation/Systems.cpp.o -MF CMakeFiles/GAME.dir/src/spriteManipulation/Systems.cpp.o.d -o CMakeFiles/GAME.dir/src/spriteManipulation/Systems.cpp.o -c /home/zombiewafle/Escritorio/spriteManipulation/src/spriteManipulation/Systems.cpp
 
 CMakeFiles/GAME.dir/src/spriteManipulation/Systems.cpp.i: cmake_force
@@ -156,7 +170,7 @@ CMakeFiles/GAME.dir/src/spriteManipulation/Systems.cpp.s: cmake_force
 CMakeFiles/GAME.dir/src/spriteManipulation/spManipulation.cpp.o: CMakeFiles/GAME.dir/flags.make
 CMakeFiles/GAME.dir/src/spriteManipulation/spManipulation.cpp.o: /home/zombiewafle/Escritorio/spriteManipulation/src/spriteManipulation/spManipulation.cpp
 CMakeFiles/GAME.dir/src/spriteManipulation/spManipulation.cpp.o: CMakeFiles/GAME.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/zombiewafle/Escritorio/spriteManipulation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/GAME.dir/src/spriteManipulation/spManipulation.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/zombiewafle/Escritorio/spriteManipulation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/GAME.dir/src/spriteManipulation/spManipulation.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/GAME.dir/src/spriteManipulation/spManipulation.cpp.o -MF CMakeFiles/GAME.dir/src/spriteManipulation/spManipulation.cpp.o.d -o CMakeFiles/GAME.dir/src/spriteManipulation/spManipulation.cpp.o -c /home/zombiewafle/Escritorio/spriteManipulation/src/spriteManipulation/spManipulation.cpp
 
 CMakeFiles/GAME.dir/src/spriteManipulation/spManipulation.cpp.i: cmake_force
@@ -174,6 +188,7 @@ GAME_OBJECTS = \
 "CMakeFiles/GAME.dir/src/Game/Graphics/Texture.cpp.o" \
 "CMakeFiles/GAME.dir/src/Game/Graphics/TextureManager.cpp.o" \
 "CMakeFiles/GAME.dir/src/Scene/Scene.cpp.o" \
+"CMakeFiles/GAME.dir/src/Scene/SceneManager.cpp.o" \
 "CMakeFiles/GAME.dir/src/spriteManipulation/Systems.cpp.o" \
 "CMakeFiles/GAME.dir/src/spriteManipulation/spManipulation.cpp.o"
 
@@ -185,6 +200,7 @@ GAME: CMakeFiles/GAME.dir/src/Game/Game.cpp.o
 GAME: CMakeFiles/GAME.dir/src/Game/Graphics/Texture.cpp.o
 GAME: CMakeFiles/GAME.dir/src/Game/Graphics/TextureManager.cpp.o
 GAME: CMakeFiles/GAME.dir/src/Scene/Scene.cpp.o
+GAME: CMakeFiles/GAME.dir/src/Scene/SceneManager.cpp.o
 GAME: CMakeFiles/GAME.dir/src/spriteManipulation/Systems.cpp.o
 GAME: CMakeFiles/GAME.dir/src/spriteManipulation/spManipulation.cpp.o
 GAME: CMakeFiles/GAME.dir/build.make
@@ -192,7 +208,7 @@ GAME: /usr/lib/libSDL2_image.so
 GAME: /usr/lib/liblua5.4.so
 GAME: /usr/lib/libm.so
 GAME: CMakeFiles/GAME.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/zombiewafle/Escritorio/spriteManipulation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable GAME"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/zombiewafle/Escritorio/spriteManipulation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable GAME"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/GAME.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

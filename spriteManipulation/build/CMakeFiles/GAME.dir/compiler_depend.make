@@ -2187,6 +2187,9 @@ CMakeFiles/GAME.dir/src/Scene/Scene.cpp.o: /home/zombiewafle/Escritorio/spriteMa
   /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/xsavesintrin.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/xtestintrin.h
 
+CMakeFiles/GAME.dir/src/Scene/SceneManager.cpp.o: /home/zombiewafle/Escritorio/spriteManipulation/src/Scene/SceneManager.cpp \
+  /usr/include/stdc-predef.h
+
 CMakeFiles/GAME.dir/src/main.cpp.o: /home/zombiewafle/Escritorio/spriteManipulation/src/main.cpp \
   /home/zombiewafle/Escritorio/spriteManipulation/src/Game/Game.h \
   /home/zombiewafle/Escritorio/spriteManipulation/src/Scene/Scene.h \
@@ -4101,6 +4104,8 @@ CMakeFiles/GAME.dir/src/spriteManipulation/spManipulation.cpp.o: /home/zombiewaf
 /home/zombiewafle/Escritorio/spriteManipulation/src/spriteManipulation/Systems.cpp:
 
 /home/zombiewafle/Escritorio/spriteManipulation/src/main.cpp:
+
+/home/zombiewafle/Escritorio/spriteManipulation/src/Scene/SceneManager.cpp:
 
 /home/zombiewafle/Escritorio/spriteManipulation/src/Game/Graphics/DungeonTileType.h:
 

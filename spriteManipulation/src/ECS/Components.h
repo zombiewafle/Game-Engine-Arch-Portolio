@@ -13,9 +13,6 @@ struct NameComponent {
 };
 
 struct TransformComponent {
-  // glm::ivec2 position;
-  // glm::vec2 scale;
-  // double rotation;
   int x;
   int y;
 };
@@ -37,6 +34,7 @@ struct SpriteComponent {
   int animationFrames = 0;
   int animationDuration = 0;
   PixelShader shader = { nullptr, "" };
+  SDL_Color color = {0,0,0,0};
 
   Uint32 lastUpdate = 0;
 };
@@ -47,4 +45,24 @@ struct TilemapComponent {
   int height;
   int tileSize;
   std::vector<DungeonTileType> tileTypes; 
+};
+
+struct RigidbodyComponent {
+  glm::vec2 velocity; 
+  glm::vec2 acceleration; 
+  bool gravity; 
+  float mass;
+  bool isStatic;
+};
+
+struct ColliderComponent {
+  int width;
+  int height;
+  bool isInCollision;
+  int offsetX;
+  int offsetY;
+  bool isPortal;
+
+  ColliderComponent(int w, int h, int offsetX = 0, int offsetY = 0)
+      : width(w), height(h), offsetX(offsetX), offsetY(offsetY), isInCollision(false) {}
 };

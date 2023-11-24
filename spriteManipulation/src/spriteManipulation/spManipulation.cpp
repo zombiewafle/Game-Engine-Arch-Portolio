@@ -25,7 +25,8 @@ std::unique_ptr<Scene> spManipulation::createGameplayScene()
     8,
     1000,
     Shaders::grayscale, 
-    SDL_GetTicks()
+    SDL_GetTicks(),
+    0,0,0,0
   );
 
   scene->player->addComponent<SpriteComponent>(
@@ -35,19 +36,26 @@ std::unique_ptr<Scene> spManipulation::createGameplayScene()
     4,
     1000,
     PixelShader{nullptr, ""},
-    SDL_GetTicks()
+    SDL_GetTicks(),
+    0,0,0,0
   );
+
 
   scene->addSetupSystem<TilemapSetupSystem>(renderer);
   scene->addRenderSystem<TilemapRenderSystem>();
 
   scene->addEventSystem<PlayerInputEventSystem>();
   scene->addUpdateSystem<PlayerSpriteUpdateSystem>();
-  // scene->addUpdateSystem<MovementUpdateSystem>();
+  scene->addUpdateSystem<MovementUpdateSystem>();
 
   scene->addSetupSystem<SpriteSetupSystem>(renderer);
   scene->addRenderSystem<SpriteRenderSystem>();
   scene->addUpdateSystem<SpriteUpdateSystem>();
+  scene->addRenderSystem<ColliderRenderSystem>();
+  
+
+  // scene->addUpdateSystem<PhysicsSystem>();
+  scene->addUpdateSystem<CollisionSystem>();
 
   return scene; 
 }

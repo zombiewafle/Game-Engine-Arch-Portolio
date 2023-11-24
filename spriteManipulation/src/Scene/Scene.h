@@ -16,6 +16,7 @@ class Scene {
     std::vector<std::shared_ptr<EventSystem>> eventSystems;
     std::vector<std::shared_ptr<UpdateSystem>> updateSystems;
     std::vector<std::shared_ptr<RenderSystem>> renderSystems;
+    // std::vector<std::shared_ptr<PhysicsSystem>> physicsSystem;
     std::string name;
 
   public:
