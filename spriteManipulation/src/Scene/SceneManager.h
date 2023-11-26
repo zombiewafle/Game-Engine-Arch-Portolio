@@ -1,50 +1,32 @@
+#pragma once
+
 #include <memory>
 #include <unordered_map>
+#include <string>
 #include "Scene.h"
+#include <SDL.h>
+#include "Game/Game.h" 
 
 class SceneManager {
 private:
-    std::unordered_map<std::string, std::shared_ptr<Scene>> scenes;
-    std::shared_ptr<Scene> currentScene;
+    std::unordered_map<std::string, std::unique_ptr<Scene>> scenes;
+    std::unique_ptr<Scene> currentScene;
+    std::string currentSceneName;
+    // Game* game;
+
 
 public:
-    SceneManager() = default;
+    SceneManager();
+    void teardown();
+    void addScene(const std::string& name, std::unique_ptr<Scene> scene);
+    void switchToScene(const std::string& name);
+    void updateCurrentScene(double dT);
+    void renderCurrentScene(SDL_Renderer* renderer);
+    void handleEventCurrentScene(SDL_Event& event);
+    Scene* getCurrentScene() const; 
+    std::unique_ptr<Scene>& getCurrentScene();
+    bool hasScene(const std::string& name) const; 
+    const std::string& getCurrentSceneName() const;
 
-    void addScene(const std::string& name, std::shared_ptr<Scene> scene) {
-        scenes[name] = scene;
-    }
-
-    void switchToScene(const std::string& name) {
-        auto it = scenes.find(name);
-        if (it != scenes.end()) {
-            if (currentScene) {
-                // Puedes llamar a un método de 'teardown' si es necesario.
-                // currentScene->teardown();
-            }
-            currentScene = it->second;
-            currentScene->setup();  // Configura la nueva escena.
-        }
-    }
-
-    void updateCurrentScene(double dT) {
-        if (currentScene) {
-            currentScene->update(dT);
-        }
-    }
-
-    void renderCurrentScene(SDL_Renderer* renderer) {
-        if (currentScene) {
-            currentScene->render(renderer);
-        }
-    }
-
-    void handleEventCurrentScene(SDL_Event event) {
-        if (currentScene) {
-            currentScene->processEvents(event);
-        }
-    }
-
-    std::shared_ptr<Scene> getCurrentScene() const {
-        return currentScene;
-    }
+    bool isTransition;
 };

@@ -16,7 +16,6 @@ class Scene {
     std::vector<std::shared_ptr<EventSystem>> eventSystems;
     std::vector<std::shared_ptr<UpdateSystem>> updateSystems;
     std::vector<std::shared_ptr<RenderSystem>> renderSystems;
-    // std::vector<std::shared_ptr<PhysicsSystem>> physicsSystem;
     std::string name;
 
   public:
@@ -26,6 +25,7 @@ class Scene {
     entt::registry r;
     Entity* world;   
     Entity* player;
+    Entity* portal;
 
     Entity createEntity(
       const std::string& name = "NO NAME",
@@ -65,4 +65,5 @@ class Scene {
     void update(double dT);
     void render(SDL_Renderer* renderer);
     void processEvents(SDL_Event event);
+    const std::string& getName() const;
 };

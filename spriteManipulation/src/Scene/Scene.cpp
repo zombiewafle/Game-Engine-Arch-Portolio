@@ -15,13 +15,18 @@ Scene::Scene(const std::string& name)
   print("Scene ", name, "constructed!");
   world = new Entity(r.create(), this);
   world->addComponent<TilemapComponent>();
-  // world->addComponent<ColliderComponent>(x, y);
 
   player = new Entity(r.create(), this);
   player->addComponent<TransformComponent>(0, 0);
   player->addComponent<SpeedComponent>(0, 0);
   player->addComponent<RigidbodyComponent>(glm::vec2(0.0f, 0.0f), glm::vec2(0.0f, 0.0f), true, 1.0f, false); 
-  player->addComponent<ColliderComponent>(16,16);
+  player->addComponent<ColliderComponent>(16,16, 0, 0, false, false, true, false);
+  player->addComponent<Health_DamageComponent>(100,1);
+
+  portal = new Entity(r.create(), this);
+  portal->addComponent<TransformComponent>(30, 30);
+  portal->addComponent<ColliderComponent>(16,16, 0, 0, false, true, false, false);
+  // // world->addComponent<ColliderComponent>(x, y);
 }
 
 Scene::~Scene()
@@ -35,7 +40,8 @@ Entity Scene::createEntity(const std::string& name, int x, int y)
   entity.addComponent<NameComponent>(name);
   entity.addComponent<TransformComponent>(x, y);
   entity.addComponent<RigidbodyComponent>(glm::vec2(0.0f, 0.0f), glm::vec2(0.0f, 0.0f), true, 1.0f, false); 
-  entity.addComponent<ColliderComponent>(16,16);
+  entity.addComponent<ColliderComponent>(16,16, 0, 0, false, false, false, true);
+  entity.addComponent<Health_DamageComponent>(100,1);
   // entity.addComponent<RigidbodyComponent>(glm::vec2(0.0f, 0.0f), glm::vec2(0.0f, 0.0f), true, 1.0f, true); 
 
   return entity;
@@ -79,4 +85,8 @@ void Scene::processEvents(SDL_Event event)
   {
     sys->run(event);
   }
+}
+
+const std::string& Scene::getName() const {
+    return name;
 }

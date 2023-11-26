@@ -1,4 +1,3 @@
-// #include "Shaders.h"
 #include "Game/Graphics/PixelShader.h"
 
 namespace Shaders {

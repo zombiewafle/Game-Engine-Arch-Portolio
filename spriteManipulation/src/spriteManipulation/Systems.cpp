@@ -9,8 +9,6 @@
 #include <vector>
 #include <string>
 #include <iostream>
-// #include <entt/entt.hpp>
-
 
 #include "Components.h"
 #include "ECS/Entity.h"
@@ -179,22 +177,21 @@ void TilemapRenderSystem::run(SDL_Renderer* renderer) {
     int height = tilemapComponent.height;
     int size = tilemapComponent.tileSize;
     int scale = 7;
-    // SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
 
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
             Tile& tile = tilemapComponent.tilemap[y * width + x];
-            // Asegúrate de que el puntero a la textura no es nulo antes de intentar renderizarlo
+            
             if (tile.texture) {
                 tile.texture->render(
-                    x * size * scale,  // Posición X en píxeles
-                    y * size * scale,  // Posición Y en píxeles
-                    size * scale,      // Ancho del tile (posiblemente escalado)
-                    size * scale,      // Alto del tile (posiblemente escalado)
-                    nullptr,           // SDL_Rect* clip (puede ser nullptr si no necesitas clipping)
-                    0.0,               // Ángulo de rotación
-                    nullptr,           // Centro de rotación (puede ser nullptr si no necesitas rotación)
-                    SDL_FLIP_NONE      // Reflejo (puedes usar SDL_FLIP_HORIZONTAL o SDL_FLIP_VERTICAL si es necesario)
+                    x * size * scale,  
+                    y * size * scale,  
+                    size * scale,      
+                    size * scale,      
+                    nullptr,           
+                    0.0,               
+                    nullptr,           
+                    SDL_FLIP_NONE      
                 );
             }
         }
@@ -271,28 +268,23 @@ void PlayerSpriteUpdateSystem::run(double dT) {
 void MovementUpdateSystem::run(double dT) {
     const auto view = scene->r.view<TransformComponent, SpeedComponent, SpriteComponent>();
 
-    // Suponiendo que tienes variables que almacenan el ancho y el alto de la ventana
-    const int windowWidth = 180;  // Reemplaza con el ancho real de la ventana
-    const int windowHeight = 135; // Reemplaza con el alto real de la ventana
+    const int windowWidth = 180;  
+    const int windowHeight = 135; 
 
     for (const entt::entity e : view) {
         auto& transform = view.get<TransformComponent>(e);
         const auto& speed = view.get<SpeedComponent>(e);
         const auto& sprite = view.get<SpriteComponent>(e);
 
-        // Calcular la nueva posición basada en la velocidad
         int newX = transform.x + speed.x * dT;
         int newY = transform.y + speed.y * dT;
 
-        // Ajustar la posición basada en el tamaño del sprite (o collider si es diferente)
-        int spriteWidth = sprite.size;   // Asumiendo que el tamaño del sprite es el ancho
-        int spriteHeight = sprite.size;  // Asumiendo que el tamaño del sprite es el alto
+        int spriteWidth = sprite.size;   
+        int spriteHeight = sprite.size;  
 
-        // Verificar los límites de la ventana y ajustar si es necesario
         newX = std::max(0, std::min(newX, windowWidth - spriteWidth));
         newY = std::max(0, std::min(newY, windowHeight - spriteHeight));
 
-        // Actualizar la posición del componente Transform
         transform.x = newX;
         transform.y = newY;
     }
@@ -329,33 +321,36 @@ void MovementUpdateSystem::run(double dT) {
  */
 
 void CollisionSystem::run(double dT) {
-  auto view = scene->r.view<ColliderComponent, TransformComponent>();
-  for (auto itA = view.begin(); itA != view.end(); ++itA) {
-    auto entityA = *itA;
-    auto [colliderA, transformA] = view.get<ColliderComponent, TransformComponent>(entityA);
-    for (auto itB = std::next(itA); itB != view.end(); ++itB) {
-      auto entityB = *itB;
-      auto [colliderB, transformB] = view.get<ColliderComponent, TransformComponent>(entityB);
-      if (checkAABBCollision(transformA, colliderA, transformB, colliderB)) {
-        colliderA.isInCollision = true;
-        colliderB.isInCollision = true;
-        handleCollision(entityA, entityB);
-      }
-      else{
-        colliderA.isInCollision = false;
-        colliderB.isInCollision = false;
-      }
+    auto view = scene->r.view<ColliderComponent, TransformComponent>();
+
+    for (auto entity : view) {
+        auto& collider = view.get<ColliderComponent>(entity);
+        collider.isInCollision = false;
     }
-  }
+
+    for (auto itA = view.begin(); itA != view.end(); ++itA) {
+        auto entityA = *itA;
+        auto& colliderA = view.get<ColliderComponent>(entityA);
+
+        for (auto itB = std::next(itA); itB != view.end(); ++itB) {
+            auto entityB = *itB;
+            auto& colliderB = view.get<ColliderComponent>(entityB);
+
+            if (checkAABBCollision(view.get<TransformComponent>(entityA), colliderA, view.get<TransformComponent>(entityB), colliderB)) {
+                handleCollision(entityA, entityB);
+            }
+        }
+    }
 }
+
+
 
 bool CollisionSystem::checkAABBCollision(TransformComponent& transformA, ColliderComponent& colliderA,
                                          TransformComponent& transformB, ColliderComponent& colliderB){
-    // Check if there's no overlap on the x-axis
+    
     if (transformA.x + colliderA.width < transformB.x || transformB.x + colliderB.width < transformA.x) return false;
-    // Check if there's no overlap on the y-axis
+    
     if (transformA.y + colliderA.height < transformB.y || transformB.y + colliderB.height < transformA.y) return false;
-    // Overlap exists, so there is a collision
     
     return true;
 }
@@ -363,48 +358,115 @@ bool CollisionSystem::checkAABBCollision(TransformComponent& transformA, Collide
 
 
 void CollisionSystem::handleCollision(entt::entity entityA, entt::entity entityB) {
-    // Asume que tienes acceso a un componente de Sprite o Render para cada entidad
-    auto& spriteA = scene->r.get<SpriteComponent>(entityA);
-    auto& spriteB = scene->r.get<SpriteComponent>(entityB);
+    auto& colliderA = scene->r.get<ColliderComponent>(entityA);
+    auto& colliderB = scene->r.get<ColliderComponent>(entityB);
 
-    // Cambia el color de los sprites implicados en la colisión
-    spriteA.color = SDL_Color{255, 0, 0, 255}; // Rojo
-    spriteB.color = SDL_Color{255, 0, 0, 255}; // Rojo
+    colliderA.isInCollision = true;
+    colliderB.isInCollision = true;
 
-    // Imprime la colisión en la consola
+    if (colliderA.isPlayer && colliderB.isPortal) {
+
+        std::cout << "Player has collided with a portal!" << std::endl;
+        
+    } else if (colliderB.isPlayer && colliderA.isPortal) {
+        std::cout << "Player has collided with a portal!" << std::endl;
+         
+    }
+
     std::cout << "Collision detected between entities: " << static_cast<uint32_t>(entityA)
               << " and " << static_cast<uint32_t>(entityB) << std::endl;
-    
-    
 }
 
+
 void ColliderRenderSystem::run(SDL_Renderer* renderer) {
-    auto view = scene->r.view<TransformComponent, ColliderComponent, SpriteComponent>();  // Asegúrate de tener el SpriteComponent también
+    auto view = scene->r.view<TransformComponent, ColliderComponent, SpriteComponent>(); 
 
     for (auto entity : view) {
         auto [transform, collider, sprite] = view.get<TransformComponent, ColliderComponent, SpriteComponent>(entity);
 
-        // Ajusta los colores según el estado de la colisión
-        SDL_SetRenderDrawColor(renderer,
-                               collider.isInCollision ? 255 : 0, // Rojo si está colisionando
-                               collider.isInCollision ? 0 : 255, // Verde si no está colisionando
-                               0,                                // Sin componente azul
-                               SDL_ALPHA_OPAQUE);               // Opaco
-
-        // Calcula la posición y el tamaño del rectángulo del colisionador
+         SDL_SetRenderDrawColor(renderer,
+                               collider.isInCollision && !collider.isPortal ? 255 : 0, 
+                               !collider.isInCollision && !collider.isPortal ? 255 : 0,
+                               collider.isPortal ? 255 : 0, 
+                               SDL_ALPHA_OPAQUE); 
         SDL_Rect rect = {
-            static_cast<int>(transform.x ), // Ajusta la posición X con el desplazamiento del sprite
-            static_cast<int>(transform.y ), // Ajusta la posición Y con el desplazamiento del sprite
-            static_cast<int>(collider.width ),  // Escala el ancho si es necesario
-            static_cast<int>(collider.height )  // Escala el alto si es necesario
+            static_cast<int>(transform.x ), 
+            static_cast<int>(transform.y ), 
+            static_cast<int>(collider.width ),  
+            static_cast<int>(collider.height )  
         };
 
-        // Dibuja el rectángulo del colisionador
         SDL_RenderDrawRect(renderer, &rect);
         
-        // Debugging: imprime información sobre la colisión
         std::cout << "Entity: " << static_cast<uint32_t>(entity)
-                  << " Collision: " << collider.isInCollision << std::endl;
+                  << " Collision: " << collider.isInCollision
+                  << " Portal: " << collider.isPortal
+                  << " Player: " << collider.isPlayer 
+                  << " Enemy: " << collider.isEnemy << std::endl;
     }
 }
 
+void SceneTransitionSystem::run(double dT) {
+    auto view = scene->r.view<ColliderComponent, TransformComponent>();
+
+    for (auto entity : view) {
+        auto& collider = view.get<ColliderComponent>(entity);
+
+        if (collider.isInCollision) {
+            if (collider.isPortal) {
+                scene->~Scene();
+                if (sceneManager.getCurrentSceneName() != "SCENE_2") {
+                    sceneManager.switchToScene("SCENE_2");
+                    setScene(sceneManager.getCurrentScene().get());
+
+                }   
+                collider.isInCollision = false;
+            }
+
+            // Si es un jugador y está en colisión, buscamos el portal
+            if (collider.isPlayer) {
+                for (auto otherEntity : view) {
+                    if (entity == otherEntity) continue; // Nos saltamos la entidad actual
+
+                    auto& otherCollider = view.get<ColliderComponent>(otherEntity);
+                    if (otherCollider.isPortal && otherCollider.isInCollision) {
+                        std::cout << "Player has collided with a portal!" << std::endl;
+                        
+                        scene->~Scene();
+                            // sceneManager.getCurrentScene().~unique_ptr();
+                        if (sceneManager.getCurrentSceneName() != "SCENE_2") {
+                            sceneManager.switchToScene("SCENE_2");
+                            setScene(sceneManager.getCurrentScene().get());
+
+                        }
+                        collider.isInCollision = false;
+                        otherCollider.isInCollision = false;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
+
+void HealthSystem::run(double dT){
+    auto view = scene->r.view<ColliderComponent, Health_DamageComponent>();
+
+    for (auto entity : view) {
+        auto& collider = view.get<ColliderComponent>(entity);
+        auto& healthBar = view.get<Health_DamageComponent>(entity);
+
+        if (collider.isInCollision) {
+            if(collider.isEnemy){
+                healthBar.healthBar -= healthBar.damage;
+                if(healthBar.healthBar <= 0){
+                    print("HAS MUERTO!");
+                    exit(0);
+                }
+            }
+
+            std::cout << "Entity: " << static_cast<uint32_t>(entity)
+                      << " Health: " << healthBar.healthBar << std::endl;
+        }
+    }
+}

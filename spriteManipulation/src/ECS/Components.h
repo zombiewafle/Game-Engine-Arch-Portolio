@@ -34,7 +34,6 @@ struct SpriteComponent {
   int animationFrames = 0;
   int animationDuration = 0;
   PixelShader shader = { nullptr, "" };
-  SDL_Color color = {0,0,0,0};
 
   Uint32 lastUpdate = 0;
 };
@@ -62,7 +61,16 @@ struct ColliderComponent {
   int offsetX;
   int offsetY;
   bool isPortal;
+  bool isPlayer;
+  bool isEnemy;
 
-  ColliderComponent(int w, int h, int offsetX = 0, int offsetY = 0)
-      : width(w), height(h), offsetX(offsetX), offsetY(offsetY), isInCollision(false) {}
+  ColliderComponent(int w, int h, int offsetX = 0, int offsetY = 0, bool isInCollision = false, bool isPortal = false , bool isPlayer = false, bool isEnemy = false)
+      : width(w), height(h), offsetX(offsetX), offsetY(offsetY), isInCollision(isInCollision), isPortal(isPortal), isPlayer(isPlayer), isEnemy(isEnemy) {}
+};
+
+struct Health_DamageComponent{
+  int healthBar;
+  int damage;
+
+  Health_DamageComponent(int health, int dam): healthBar(health), damage(dam){}
 };

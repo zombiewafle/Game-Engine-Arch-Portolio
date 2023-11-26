@@ -4,6 +4,7 @@
 #include "ECS/System.h"
 #include "ECS/Components.h"
 #include <FastNoise.h>
+#include "Scene/SceneManager.h"
 
 class RectRenderSystem : public RenderSystem {
   public:
@@ -107,5 +108,33 @@ private:
   void handleCollision(entt::entity entityA, entt::entity entityB);
 };
 
+class SceneTransitionSystem : public UpdateSystem{
+  private:
+    SceneManager& sceneManager;
+
+  public:
+    SceneTransitionSystem(SceneManager& manager) : sceneManager(manager) {}
+    void run(double dT) override;
+};
+
+class HealthSystem : public UpdateSystem{
+  public: 
+    void run(double dT) override;
+};
+
+// class TimerUpdateSystem : public UpdateSystem {
+// public:
+//     TimerUpdateSystem(double& timer) : timer(timer) {}
+
+//     void run(double dT) override {
+//         // timer += dT;
+//     }
+
+//     double getTimerValue() const {
+//         return timer;
+//     }
 
 
+// private:
+//     double& timer;
+// };

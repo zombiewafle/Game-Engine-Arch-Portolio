@@ -4,7 +4,7 @@
 #include "PixelShader.h"
 #include <map>
 #include <string>
-#include <memory>  // Para std::unique_ptr
+#include <memory>  
 
 class TextureManager {
   public:
