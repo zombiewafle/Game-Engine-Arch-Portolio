@@ -24,7 +24,12 @@ Para ejecutar cada uno de los entregables solamente es necesario descargar el c√
 #USO
 
 Para poder ejecutar el c√≥digo de los entregables, es probable que se deba hacer un chmod. Ejemplo:
+ ```
  chmod +x run.sh build.sh configure.sh
+ ```
  
 Tras haber dado permisos a los .sh. Es necesario ejecutar solamente run.sh. Ejemplo:
+
+```
 ./run.sh
+```
