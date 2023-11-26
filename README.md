@@ -16,10 +16,10 @@ La idea es ir documentando la adición de cada una de las funciones que un motor
 - sol2
 - LUA
 
-#INSTALACIÓN 
+#INSTALACIÓN \n
 Para ejecutar cada uno de los entregables solamente es necesario descargar el código (es probable que se deba eliminar la carpeta build y recompilar)
 
-#USO
+#USO\n
 Para poder ejecutar el código de los entregables, es probable que se deba hacer un chmod. Ejemplo:
  chmod +x run.sh build.sh configure.sh
  
