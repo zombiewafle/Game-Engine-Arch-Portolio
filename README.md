@@ -5,8 +5,6 @@ La idea es ir documentando la adición de cada una de las funciones que un motor
 #EVIDENCIAS DE USO
 
 ![image](https://github.com/zombiewafle/Game-Engine-Arch-Portolio/assets/40800436/73aa401f-8030-4607-967d-2f8eafd8461b)
-
-
 ![image](https://github.com/zombiewafle/Game-Engine-Arch-Portolio/assets/40800436/964d048f-fb19-4b2d-95d8-700c04c5268c)
 
 #REQUISITOS DEL PROYECTO
@@ -26,7 +24,12 @@ Para ejecutar cada uno de los entregables solamente es necesario descargar el c�
 #USO
 
 Para poder ejecutar el código de los entregables, es probable que se deba hacer un chmod. Ejemplo:
+ ```
  chmod +x run.sh build.sh configure.sh
+ ```
  
 Tras haber dado permisos a los .sh. Es necesario ejecutar solamente run.sh. Ejemplo:
+
+```
 ./run.sh
+```
